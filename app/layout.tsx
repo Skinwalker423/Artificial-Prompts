@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "@/styles/globals.css";
+import "@styles/globals.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ const RootLayout = ({
         <div className='main'>
           <div className='gradient' />
         </div>
-        <main>{children}</main>
+        <main className='app'>{children}</main>
       </body>
     </html>
   );
