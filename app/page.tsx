@@ -1,5 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
+import Feed from "@components/Feed";
 
 // export const metadata: Metadata = {
 //   title: '',
@@ -24,6 +25,7 @@ const Home = () => {
         music. The possibilities are endless, and only
         limited by your imagination.
       </p>
+      <Feed />
     </section>
   );
 };
