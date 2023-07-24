@@ -1,22 +1,27 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import React, { ReactNode } from "react";
+import "@/styles/globals.css";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Artificial Prompts",
-  description: "create chatGPT prompts and share it",
+  title: "Artifcial Prompts",
+  description: "Create and share AI prompts",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
-  children: React.ReactNode;
-}) {
+  children: ReactNode;
+}) => {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body>
+        <div className='main'>
+          <div className='gradient' />
+        </div>
+        <main>{children}</main>
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
