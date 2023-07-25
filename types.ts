@@ -8,3 +8,8 @@ export type ProviderProps = {
 };
 
 export type ProvidersProps = Record<string, ProviderProps>;
+
+export interface DropdownLinksConfigProps {
+  title: string;
+  href: string;
+}

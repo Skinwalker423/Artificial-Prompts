@@ -9,13 +9,22 @@ import {
   useSession,
   getProviders,
 } from "next-auth/react";
-import { ProvidersProps, ProviderProps } from "@types";
+import {
+  ProvidersProps,
+  ProviderProps,
+  DropdownLinksConfigProps,
+} from "@types";
 const Nav = () => {
   const [providers, setProviders] =
     useState<ProvidersProps | null>(null);
   const [toggleDropdown, setToggleDropdown] =
     useState(false);
   const isLoggedIn = true;
+
+  const dropdownLinksConfig: DropdownLinksConfigProps[] = [
+    { title: "My Profile", href: "/profile" },
+    { title: "Create Prompt", href: "/create-prompt" },
+  ];
 
   useEffect(() => {
     const getAndSetProviders = async () => {
@@ -105,13 +114,31 @@ const Nav = () => {
             />
             {toggleDropdown && (
               <div className='dropdown'>
-                <Link
-                  onClick={() => setToggleDropdown(false)}
-                  className='dropdown_link'
-                  href={"/profile"}
+                {dropdownLinksConfig.map(
+                  ({ title, href }) => {
+                    return (
+                      <Link
+                        onClick={() =>
+                          setToggleDropdown(false)
+                        }
+                        className='dropdown_link'
+                        href={href}
+                      >
+                        {title}
+                      </Link>
+                    );
+                  }
+                )}
+                <button
+                  className='mt-5 w-full black_btn'
+                  type='button'
+                  onClick={() => {
+                    setToggleDropdown(false);
+                    signOut();
+                  }}
                 >
-                  My Profile
-                </Link>
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
