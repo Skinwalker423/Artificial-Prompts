@@ -13,6 +13,8 @@ import { ProvidersProps, ProviderProps } from "@types";
 const Nav = () => {
   const [providers, setProviders] =
     useState<ProvidersProps | null>(null);
+  const [toggleDropdown, setToggleDropdown] =
+    useState(false);
   const isLoggedIn = true;
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const Nav = () => {
         />
         <p className='logo_text'>Promptopia</p>
       </Link>
-      {/* mobile navigation */}
+
       <div className='sm:flex hidden'>
         {isLoggedIn ? (
           <div className='flex gap-3 md:gap-5'>
@@ -87,6 +89,7 @@ const Nav = () => {
           </>
         )}
       </div>
+      {/* mobile navigation */}
       <div className='sm:hidden flex relative'>
         {isLoggedIn ? (
           <div className='flex'>
@@ -96,7 +99,21 @@ const Nav = () => {
               height={37}
               alt='avatar image'
               className='rounded-full'
+              onClick={() =>
+                setToggleDropdown((toogle) => !toogle)
+              }
             />
+            {toggleDropdown && (
+              <div className='dropdown'>
+                <Link
+                  onClick={() => setToggleDropdown(false)}
+                  className='dropdown_link'
+                  href={"/profile"}
+                >
+                  My Profile
+                </Link>
+              </div>
+            )}
           </div>
         ) : (
           <>
