@@ -3,14 +3,29 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SetStateAction } from "react";
 import {
   signIn,
   signOut,
   useSession,
   getProviders,
 } from "next-auth/react";
+import { ProvidersProps, ProviderProps } from "@types";
 const Nav = () => {
+  const [providers, setProviders] =
+    useState<ProvidersProps | null>(null);
   const isLoggedIn = true;
+
+  useEffect(() => {
+    const getAndSetProviders = async () => {
+      const response = await getProviders();
+
+      setProviders(response);
+    };
+
+    getAndSetProviders();
+  }, []);
+
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
       <Link className='flex gap-2 flex-center' href={"/"}>
@@ -51,7 +66,23 @@ const Nav = () => {
             </Link>
           </div>
         ) : (
-          <button className='outline_btn'>Sign in</button>
+          <>
+            {providers &&
+              Object.values(providers).map(
+                ({ id, name }) => {
+                  return (
+                    <button
+                      onClick={() => signIn(id)}
+                      type='button'
+                      key={name}
+                      className='black_btn'
+                    >
+                      {name}
+                    </button>
+                  );
+                }
+              )}
+          </>
         )}
       </div>
     </nav>
