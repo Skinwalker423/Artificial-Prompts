@@ -19,7 +19,14 @@ const Nav = () => {
     useState<ProvidersProps | null>(null);
   const [toggleDropdown, setToggleDropdown] =
     useState(false);
-  const isLoggedIn = true;
+  const { data } = useSession();
+
+  const isLoggedIn = data?.session;
+  const email = data?.session?.user?.email;
+  const image = data?.session?.user?.image;
+
+  console.log("is logged in", isLoggedIn);
+  console.log("email", email);
 
   const dropdownLinksConfig: DropdownLinksConfigProps[] = [
     { title: "My Profile", href: "/profile" },
@@ -70,7 +77,7 @@ const Nav = () => {
             </button>
             <Link href={"/profile"}>
               <Image
-                src={"/assets/images/logo.svg"}
+                src={image || "/assets/images/logo.svg"}
                 width={37}
                 height={37}
                 alt='avatar image'
@@ -103,7 +110,7 @@ const Nav = () => {
         {isLoggedIn ? (
           <div className='flex'>
             <Image
-              src={"/assets/images/logo.svg"}
+              src={image || "/assets/images/logo.svg"}
               width={37}
               height={37}
               alt='avatar image'
