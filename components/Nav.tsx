@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction } from "react";
 import {
   signIn,
   signOut,
@@ -19,7 +18,10 @@ const Nav = () => {
   useEffect(() => {
     const getAndSetProviders = async () => {
       const response = await getProviders();
-
+      console.log(
+        "response for getting providers",
+        response
+      );
       setProviders(response);
     };
 
@@ -39,7 +41,7 @@ const Nav = () => {
         <p className='logo_text'>Promptopia</p>
       </Link>
       {/* mobile navigation */}
-      <div className='sm:flex-hidden'>
+      <div className='sm:flex hidden'>
         {isLoggedIn ? (
           <div className='flex gap-3 md:gap-5'>
             {" "}
@@ -78,6 +80,37 @@ const Nav = () => {
                       className='black_btn'
                     >
                       {name}
+                    </button>
+                  );
+                }
+              )}
+          </>
+        )}
+      </div>
+      <div className='sm:hidden flex relative'>
+        {isLoggedIn ? (
+          <div className='flex'>
+            <Image
+              src={"/assets/images/logo.svg"}
+              width={37}
+              height={37}
+              alt='avatar image'
+              className='rounded-full'
+            />
+          </div>
+        ) : (
+          <>
+            {providers &&
+              Object.values(providers).map(
+                ({ id, name }) => {
+                  return (
+                    <button
+                      onClick={() => signIn(id)}
+                      type='button'
+                      key={name}
+                      className='black_btn'
+                    >
+                      Sign In
                     </button>
                   );
                 }
