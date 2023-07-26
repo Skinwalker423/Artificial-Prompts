@@ -1,5 +1,4 @@
 import React from "react";
-import { Metadata } from "next";
 import Feed from "@components/Feed";
 
 // export const metadata: Metadata = {

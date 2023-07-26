@@ -19,17 +19,27 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session }) {
+      // const sessionUser = await User.findOne({
+      //   email: session.user?.email,
+      // });
+      // console.log(
+      //   "inside session finding sessionUser",
+      //   sessionUser
+      // );
+      // session?.user?.id = sessionUser._id.toString();
+
       return session;
     },
     async signIn({ profile }) {
       try {
         await connectToMongoDb();
 
-        const userExists = await User.find({
+        const userExists = await User.findOne({
           email: profile?.email,
         });
 
         if (!userExists) {
+          console.log("user does not exist");
           User.create({
             email: profile?.email,
             username: profile?.name
@@ -38,6 +48,8 @@ export const authOptions: NextAuthOptions = {
             image: profile?.image,
           });
         }
+
+        console.log("user exists", userExists);
 
         return true;
       } catch (err) {

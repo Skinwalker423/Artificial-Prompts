@@ -11,10 +11,8 @@ import {
 } from "next-auth/react";
 import {
   ProvidersProps,
-  ProviderProps,
   DropdownLinksConfigProps,
 } from "@types";
-import { Session, User } from "next-auth";
 
 const Nav = () => {
   const [providers, setProviders] =

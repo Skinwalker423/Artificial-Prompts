@@ -1,8 +1,6 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import "@styles/globals.css";
-import { Metadata } from "next";
 import Nav from "@components/Nav";
-import { getServerSession } from "next-auth";
 import AuthProvider from "@components/Provider";
 export const metadata = {
   title: "Artifcial Prompts",
