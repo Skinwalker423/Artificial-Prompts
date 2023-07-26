@@ -3,15 +3,8 @@
 import React from "react";
 
 import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
 
-const Provider = ({
-  children,
-  session,
-}: {
-  children: React.ReactNode;
-  session: Session | null | undefined;
-}) => {
+const AuthProvider = ({ children, session }) => {
   return (
     <SessionProvider session={session}>
       {children}
@@ -19,4 +12,4 @@ const Provider = ({
   );
 };
 
-export default Provider;
+export default AuthProvider;

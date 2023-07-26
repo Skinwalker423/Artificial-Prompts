@@ -2,22 +2,18 @@ import React, { ReactNode } from "react";
 import "@styles/globals.css";
 import { Metadata } from "next";
 import Nav from "@components/Nav";
-import Provider from "@components/Provider";
 import { getServerSession } from "next-auth";
-export const metadata: Metadata = {
+import AuthProvider from "@components/Provider";
+export const metadata = {
   title: "Artifcial Prompts",
   description: "Create and share AI prompts",
 };
 
-const RootLayout = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+const RootLayout = ({ children }) => {
   return (
     <html lang='en'>
       <body>
-        <Provider>
+        <AuthProvider>
           <div className='main'>
             <div className='gradient' />
           </div>
@@ -25,7 +21,7 @@ const RootLayout = ({
             <Nav />
             {children}
           </main>
-        </Provider>
+        </AuthProvider>
       </body>
     </html>
   );

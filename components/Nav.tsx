@@ -14,16 +14,18 @@ import {
   ProviderProps,
   DropdownLinksConfigProps,
 } from "@types";
+import { Session, User } from "next-auth";
+
 const Nav = () => {
   const [providers, setProviders] =
     useState<ProvidersProps | null>(null);
   const [toggleDropdown, setToggleDropdown] =
     useState(false);
-  const { data } = useSession();
+  const { data: session } = useSession();
 
-  const isLoggedIn = data?.session;
-  const email = data?.session?.user?.email;
-  const image = data?.session?.user?.image;
+  const isLoggedIn = session;
+  const email = session?.user?.email;
+  const image = session?.user?.image;
 
   console.log("is logged in", isLoggedIn);
   console.log("email", email);
