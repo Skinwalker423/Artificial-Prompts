@@ -1,3 +1,4 @@
+import { ConnectOptions } from "mongoose";
 import mongoose from "mongoose";
 
 let isConnected = false;
@@ -13,7 +14,9 @@ export const connectToMongoDb = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI!, {
       dbName: "share_promp",
-    });
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as ConnectOptions);
 
     isConnected = true;
     console.log("mongodb now connected");

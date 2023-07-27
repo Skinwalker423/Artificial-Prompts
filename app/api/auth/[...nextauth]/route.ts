@@ -1,4 +1,7 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, {
+  NextAuthOptions,
+  Session,
+} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { connectToMongoDb } from "@utils/database";
 import User from "@models/user";
@@ -18,15 +21,17 @@ export const authOptions: NextAuthOptions = {
       token.userRole = "admin";
       return token;
     },
-    async session({ session }) {
-      // const sessionUser = await User.findOne({
-      //   email: session.user?.email,
-      // });
-      // console.log(
-      //   "inside session finding sessionUser",
-      //   sessionUser
-      // );
-      // session?.user?.id = sessionUser._id.toString();
+    async session({ session }: { session: any }) {
+      const sessionUser = await User.findOne({
+        email: session.user?.email,
+      });
+      console.log(
+        "inside session finding sessionUser",
+        sessionUser
+      );
+
+      if (!session.user) return session;
+      session.user.id = sessionUser._id.toString();
 
       return session;
     },

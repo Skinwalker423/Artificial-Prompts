@@ -21,15 +21,14 @@ const Nav = () => {
     useState(false);
   const { data: session } = useSession();
 
-  const isLoggedIn = session;
   const email = session?.user?.email;
   const image = session?.user?.image;
 
-  console.log("is logged in", isLoggedIn);
+  console.log("is logged in", session);
   console.log("email", email);
 
   const dropdownLinksConfig: DropdownLinksConfigProps[] = [
-    { title: "My Profile", href: "/pages/profile" },
+    { title: "My Profile", href: "/profile" },
     { title: "Create Prompt", href: "/create-prompt" },
   ];
 
@@ -60,7 +59,7 @@ const Nav = () => {
       </Link>
 
       <div className='sm:flex hidden'>
-        {isLoggedIn ? (
+        {session ? (
           <div className='flex gap-3 md:gap-5'>
             {" "}
             <Link
@@ -75,7 +74,7 @@ const Nav = () => {
             >
               Sign Out
             </button>
-            <Link href={"/pages/profile"}>
+            <Link href={"/profile"}>
               <Image
                 src={image || "/assets/images/logo.svg"}
                 width={37}
@@ -107,7 +106,7 @@ const Nav = () => {
       </div>
       {/* mobile navigation */}
       <div className='sm:hidden flex relative'>
-        {isLoggedIn ? (
+        {session ? (
           <div className='flex'>
             <Image
               src={image || "/assets/images/logo.svg"}
