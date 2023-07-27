@@ -29,7 +29,7 @@ const Nav = () => {
   console.log("email", email);
 
   const dropdownLinksConfig: DropdownLinksConfigProps[] = [
-    { title: "My Profile", href: "/profile" },
+    { title: "My Profile", href: "/pages/profile" },
     { title: "Create Prompt", href: "/create-prompt" },
   ];
 
@@ -75,7 +75,7 @@ const Nav = () => {
             >
               Sign Out
             </button>
-            <Link href={"/profile"}>
+            <Link href={"/pages/profile"}>
               <Image
                 src={image || "/assets/images/logo.svg"}
                 width={37}
@@ -125,6 +125,7 @@ const Nav = () => {
                   ({ title, href }) => {
                     return (
                       <Link
+                        key={title}
                         onClick={() =>
                           setToggleDropdown(false)
                         }
