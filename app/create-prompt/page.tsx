@@ -1,7 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { UseSessionOptions } from "next-auth/react";
+import { useRouter } from "next/router";
+import Form from "@components/Form";
 
 const CreatePrompt = () => {
-  return <div>Create Prompt</div>;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [post, setPost] = useState({ post: "", tag: "" });
+
+  return <Form />;
 };
 
 export default CreatePrompt;
