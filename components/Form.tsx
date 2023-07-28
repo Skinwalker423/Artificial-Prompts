@@ -1,4 +1,5 @@
 import { FormProps } from "@types";
+import Link from "next/link";
 
 function Form({
   type,
@@ -62,6 +63,18 @@ function Form({
             className='form_input'
           />
         </label>
+        <div className='flex-end mx-3 mb-5 gap-4'>
+          <Link className='text-gray-500' href={"/"}>
+            Cancel
+          </Link>
+          <button
+            className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
+            type='submit'
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? `${type}...` : type}
+          </button>
+        </div>
       </form>
     </section>
   );
