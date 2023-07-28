@@ -22,6 +22,10 @@ const CreatePrompt = () => {
 
     try {
       const response = await fetch("/api/prompt/new", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,
