@@ -20,12 +20,15 @@ export interface DropdownLinksConfigProps {
   href: string;
 }
 
+export interface Post {
+  prompt?: string;
+  tag?: string;
+}
+
 export interface FormProps {
   type: string;
-  post: { post: string; tag: string };
-  setPost: Dispatch<
-    SetStateAction<{ post: string; tag: string }>
-  >;
+  post: Post;
+  setPost: Dispatch<SetStateAction<Post>>;
   isSubmitting: boolean;
   handleSubmit: FormEventHandler<HTMLFormElement>;
 }
