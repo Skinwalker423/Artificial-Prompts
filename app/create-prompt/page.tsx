@@ -13,7 +13,7 @@ const CreatePrompt = () => {
   const [post, setPost] = useState({ post: "", tag: "" });
 
   const { data: session } = useSession();
-  const router = useRouter();
+  // const router = useRouter();
 
   const createPrompt = async (event: FormEvent) => {
     event.preventDefault();
