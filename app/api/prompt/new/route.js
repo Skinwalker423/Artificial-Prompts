@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import Prompt from "@models/prompt";
 import { connectToMongoDb } from "@utils/database";
-import mongoose from "mongoose";
 
 export async function POST(req) {
   const { userId, prompt, tag } = await req.json();
@@ -10,7 +9,7 @@ export async function POST(req) {
   try {
     await connectToMongoDb();
     const newPrompt = new Prompt({
-      userId,
+      creator: userId,
       prompt,
       tag,
     });
