@@ -16,7 +16,8 @@ const PromtCard = ({
   post,
   handleTagClick,
 }: PromptCardProps) => {
-  return <div>PromtCard</div>;
+  console.log("post", post);
+  return <div key={post.id}>{post.prompt}</div>;
 };
 
 export default PromtCard;
