@@ -11,19 +11,15 @@ const ProfilePage = () => {
 
   const [posts, setPosts] = useState([]);
 
-  if (!session?.user) {
-    router.push("/");
-  }
-
   useEffect(() => {
     const fetchPosts = async () => {
       const userId = session?.user?.id;
-      const prompts = await fetch(
+      const userPosts = await fetch(
         `/api/users/${userId}/posts`
       );
 
-      const data = await prompts.json();
-      console.log("fetching prompts", data);
+      const data = await userPosts.json();
+      console.log("fetching posts", data);
       setPosts(data);
     };
 
@@ -35,7 +31,7 @@ const ProfilePage = () => {
 
   return (
     <Profile
-      name='My'
+      name={session?.user.name}
       desc='Welcome to your profile page'
       data={posts}
       handleEdit={handleEdit}

@@ -8,7 +8,8 @@ const Profile = ({
   handleDelete,
   handleEdit,
 }: ProfileProps) => {
-  return <div>Profile</div>;
+  console.log("data from api", data);
+  return <div>{name}</div>;
 };
 
 export default Profile;
