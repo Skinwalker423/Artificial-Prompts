@@ -4,19 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Creator } from "@types";
-
-export interface PromptProps {
-  _id: string;
-  creator: Creator;
-  tag: string;
-  prompt: string;
-}
-
-export interface PromptCardProps {
-  post: PromptProps;
-  handleTagClick: (postId: string) => void;
-}
+import { PromptCardProps } from "@types";
 
 const PromtCard = ({
   post,
@@ -27,6 +15,11 @@ const PromtCard = ({
   const [copiedPrompt, setCopiedPrompt] = useState<
     string | null
   >(null);
+
+  const handleCopy = () => {
+    setCopiedPrompt(post.prompt);
+    navigator.clipboard.writeText(post.prompt);
+  };
 
   return (
     <div className='prompt_card' key={post._id}>
@@ -48,10 +41,7 @@ const PromtCard = ({
             </p>
           </div>
         </div>
-        <div
-          onClick={() => setCopiedPrompt(post.prompt)}
-          className=''
-        >
+        <div onClick={handleCopy} className=''>
           <Image
             src={
               copiedPrompt === post.prompt

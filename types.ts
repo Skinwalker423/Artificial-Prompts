@@ -39,3 +39,15 @@ export interface Creator {
   username: string;
   image: string;
 }
+
+export interface PromptProps {
+  _id: string;
+  creator: Creator;
+  tag: string;
+  prompt: string;
+}
+
+export interface PromptCardProps {
+  post: PromptProps;
+  handleTagClick: (tag: string) => void;
+}

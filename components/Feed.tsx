@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import PromtCard from "./PromtCard";
-import { PromptProps } from "./PromtCard";
+import { PromptProps } from "@types";
 
 interface PromptCardListProps {
   data: PromptProps[];
@@ -58,7 +58,7 @@ const Feed = () => {
     };
   };
 
-  const handleTagClick = (postId: string) => {};
+  const handleTagClick = (tag: string) => {};
 
   return (
     <section className='feed'>
