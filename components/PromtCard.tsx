@@ -19,6 +19,9 @@ const PromtCard = ({
   const handleCopy = () => {
     setCopiedPrompt(post.prompt);
     navigator.clipboard.writeText(post.prompt);
+    setTimeout(() => {
+      setCopiedPrompt("");
+    }, 3000);
   };
 
   return (
@@ -41,7 +44,10 @@ const PromtCard = ({
             </p>
           </div>
         </div>
-        <div onClick={handleCopy} className=''>
+        <div
+          onClick={handleCopy}
+          className='group relative rounded-full hover:border-black cursor-pointer'
+        >
           <Image
             src={
               copiedPrompt === post.prompt
@@ -51,7 +57,11 @@ const PromtCard = ({
             width={12}
             height={12}
             alt='copy prompt'
+            className='hover:scale-125'
           />
+          <span className='absolute bottom-3 left-3 scale-0 rounded bg-white p-2 text-xs text-black group-hover:scale-100'>
+            {copiedPrompt ? "Copied" : "Copy to clipboard"}
+          </span>
         </div>
       </div>
       <p className='my-4 font-satoshi text-sm text-gray-700'>
