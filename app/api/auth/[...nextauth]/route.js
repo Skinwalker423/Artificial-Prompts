@@ -8,12 +8,12 @@ import User from "@models/user";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
   callbacks: {
@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
       token.userRole = "admin";
       return token;
     },
-    async session({ session }: { session: any }) {
+    async session({ session }) {
       const sessionUser = await User.findOne({
         email: session.user?.email,
       });
@@ -44,13 +44,13 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!userExists) {
-          console.log("user does not exist");
+          console.log("user does not exist", profile);
           User.create({
             email: profile?.email,
-            username: profile?.name
-              ?.replace(" ", "")
+            username: profile.name
+              .replace(" ", "")
               .toLowerCase(),
-            image: profile?.image,
+            image: profile?.picture,
           });
         }
 

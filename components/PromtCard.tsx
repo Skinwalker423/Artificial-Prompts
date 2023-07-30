@@ -1,8 +1,14 @@
-import React from "react";
+"use client";
+
+import Image from "next/image";
+import React, { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { Creator } from "@types";
 
 export interface PromptProps {
-  id: string;
-  creator?: string;
+  _id: string;
+  creator: Creator;
   tag: string;
   prompt: string;
 }
@@ -17,7 +23,19 @@ const PromtCard = ({
   handleTagClick,
 }: PromptCardProps) => {
   console.log("post", post);
-  return <div key={post.id}>{post.prompt}</div>;
+  return (
+    <div className='prompt_card' key={post._id}>
+      <div className='flex justify-between items-start gap-5'>
+        <Image
+          src={post?.creator?.image}
+          alt='creator image'
+          width={40}
+          height={40}
+          className='rounded-full object-contain'
+        />
+      </div>
+    </div>
+  );
 };
 
 export default PromtCard;

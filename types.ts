@@ -32,3 +32,10 @@ export interface FormProps {
   isSubmitting: boolean;
   handleSubmit: FormEventHandler<HTMLFormElement>;
 }
+
+export interface Creator {
+  _id: string;
+  email: string;
+  username: string;
+  image: string;
+}

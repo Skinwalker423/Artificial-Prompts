@@ -1,3 +1,4 @@
+import { PromptProps } from "@components/PromtCard";
 import { model, Schema, models } from "mongoose";
 
 const PromptSchema = new Schema({
@@ -16,6 +17,5 @@ const PromptSchema = new Schema({
 });
 
 const Prompt =
-  models.Prompt || model("Promp", PromptSchema);
-
+  models.Prompt || model("Prompt", PromptSchema);
 export default Prompt;

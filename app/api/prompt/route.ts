@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import Prompt from "@models/prompt";
 import { connectToMongoDb } from "@utils/database";
 
@@ -15,8 +15,11 @@ export async function GET(req: NextRequest) {
       status: 201,
     });
   } catch (err) {
-    return new Response("problem fetching all prompts", {
-      status: 500,
-    });
+    return new Response(
+      `problem fetching all prompts, ${err}`,
+      {
+        status: 500,
+      }
+    );
   }
 }
