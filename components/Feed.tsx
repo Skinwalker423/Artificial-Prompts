@@ -58,6 +58,8 @@ const Feed = () => {
     };
   };
 
+  const handleTagClick = (postId: string) => {};
+
   return (
     <section className='feed'>
       <form
@@ -76,7 +78,7 @@ const Feed = () => {
 
       <PromptCardList
         data={data}
-        handleTagClick={() => {}}
+        handleTagClick={() => handleTagClick}
       />
     </section>
   );
