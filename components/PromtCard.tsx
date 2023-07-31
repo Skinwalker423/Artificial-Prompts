@@ -81,7 +81,7 @@ const PromtCard = ({
       </p>
       {session?.user?.email === post.creator.email &&
         pathName === "/profile" && (
-          <div className='flex justify-end w-full gap-3'>
+          <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
             <p
               onClick={() => handleEdit && handleEdit(post)}
               className='font-inter text-sm green_gradient cursor-pointer'
