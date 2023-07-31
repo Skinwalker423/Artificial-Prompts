@@ -49,13 +49,13 @@ export interface PromptProps {
 
 export interface PromptCardProps {
   post: PromptProps;
-  handleTagClick: (tag: string) => void;
+  handleTagClick?: (tag: string) => void;
+  handleEdit?: (post: PromptProps) => void;
+  handleDelete?: (post: PromptProps) => void;
 }
 
 export interface ProfileProps {
   name: string;
   desc: string;
-  data: [];
-  handleEdit: () => void;
-  handleDelete: () => void;
+  data: PromptProps[];
 }

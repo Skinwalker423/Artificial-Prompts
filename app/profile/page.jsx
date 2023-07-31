@@ -26,16 +26,11 @@ const ProfilePage = () => {
     session?.user?.id && fetchPosts();
   }, []);
 
-  const handleEdit = () => {};
-  const handleDelete = async () => {};
-
   return (
     <Profile
       name={session?.user.name}
       desc='Welcome to your profile page'
       data={posts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
     />
   );
 };

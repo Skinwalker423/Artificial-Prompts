@@ -9,12 +9,16 @@ import { PromptCardProps } from "@types";
 const PromtCard = ({
   post,
   handleTagClick,
+  handleEdit,
+  handleDelete,
 }: PromptCardProps) => {
   console.log("post", post);
 
   const [copiedPrompt, setCopiedPrompt] = useState<
     string | null
   >(null);
+  const pathName = usePathname();
+  const { data: session } = useSession();
 
   const handleCopy = () => {
     setCopiedPrompt(post.prompt);
@@ -75,6 +79,25 @@ const PromtCard = ({
       >
         {post.tag}
       </p>
+      {session?.user?.email === post.creator.email &&
+        pathName === "/profile" && (
+          <div className='flex justify-end w-full gap-3'>
+            <p
+              onClick={() => handleEdit && handleEdit(post)}
+              className='font-inter text-sm green_gradient cursor-pointer'
+            >
+              Edit
+            </p>
+            <p
+              onClick={() =>
+                handleDelete && handleDelete(post)
+              }
+              className='font-inter text-sm orange_gradient cursor-pointer'
+            >
+              Delete
+            </p>
+          </div>
+        )}
     </div>
   );
 };
