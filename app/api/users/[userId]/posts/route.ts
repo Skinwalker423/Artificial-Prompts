@@ -2,7 +2,10 @@ import Prompt from "@models/prompt";
 import { connectToMongoDb } from "@utils/database";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-import { ParamsProps } from "@types";
+
+export interface ParamsProps {
+  userId: string;
+}
 
 export async function GET(
   req: NextApiRequest,
