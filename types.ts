@@ -59,3 +59,8 @@ export interface ProfileProps {
   desc: string;
   data: PromptProps[];
 }
+
+export interface ParamsProps {
+  id?: string;
+  userId?: string;
+}

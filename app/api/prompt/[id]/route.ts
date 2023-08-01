@@ -1,10 +1,15 @@
 import { NextApiRequest } from "next";
+import { ParamsProps } from "@types";
 
-interface ParamsProps {
-  id: string;
-}
-
-export default async function GET(
+export async function GET(
+  req: NextApiRequest,
+  { params }: { params: ParamsProps }
+) {}
+export async function PATCH(
+  req: NextApiRequest,
+  { params }: { params: ParamsProps }
+) {}
+export async function DELETE(
   req: NextApiRequest,
   { params }: { params: ParamsProps }
 ) {}
