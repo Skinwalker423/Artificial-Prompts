@@ -24,3 +24,11 @@ export const connectToMongoDb = async () => {
     console.log("problem connecting to mongodb", error);
   }
 };
+
+export const fetchPromptById = async (id: string) => {
+  const prompts: any = await fetch(`/api/prompt${id}`);
+
+  const data = await prompts.json();
+  console.log("fetching prompt", data);
+  return data;
+};
