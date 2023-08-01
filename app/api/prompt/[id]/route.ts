@@ -50,11 +50,6 @@ export async function PATCH(
       }
     );
 
-    if (!updatedPrompt.modified_count)
-      return new Response("could not update prompt", {
-        status: 404,
-      });
-
     updatedPrompt.save();
     return new Response(JSON.stringify(updatedPrompt), {
       status: 200,

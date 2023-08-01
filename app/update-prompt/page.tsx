@@ -50,12 +50,12 @@ const UpdatePrompt = ({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/prompt/new", {
+      const response = await fetch(`/api/prompt/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
 
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
@@ -67,7 +67,7 @@ const UpdatePrompt = ({
         router.push("/");
       }
     } catch (error) {
-      console.log("problem with new prompt", error);
+      console.log("problem with modifying prompt", error);
     } finally {
       setIsSubmitting(false);
     }
