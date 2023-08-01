@@ -5,7 +5,6 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Form from "@components/Form";
 import { Post } from "@types";
@@ -20,12 +19,12 @@ const UpdatePrompt = ({
   searchParams,
 }: SearchParamsProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [post, setPost] = useState({
     prompt: "",
     tag: "",
   } as Post);
 
-  const { data: session } = useSession() as any;
   const router = useRouter();
 
   const id = searchParams.id;
@@ -38,8 +37,13 @@ const UpdatePrompt = ({
       );
 
       const data = await prompts.json();
-      console.log("fetching prompts", data);
-      setPost(data);
+
+      if (!data) {
+        setError("could not find prompt. Check promptId.");
+      } else {
+        console.log("found prompt", data);
+        setPost(data);
+      }
     };
 
     fetchPrompt(id);
@@ -58,7 +62,6 @@ const UpdatePrompt = ({
         method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
-          userId: session?.user.id,
           tag: post.tag,
         }),
       });
@@ -73,15 +76,16 @@ const UpdatePrompt = ({
     }
   };
 
-  return (
-    <Form
-      type={"Edit"}
-      post={post}
-      setPost={setPost}
-      isSubmitting={isSubmitting}
-      handleSubmit={editPrompt}
-    />
-  );
+  if (error && <h1>{error}</h1>)
+    return (
+      <Form
+        type={"Edit"}
+        post={post}
+        setPost={setPost}
+        isSubmitting={isSubmitting}
+        handleSubmit={editPrompt}
+      />
+    );
 };
 
 export default UpdatePrompt;
