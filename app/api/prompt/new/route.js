@@ -4,7 +4,6 @@ import { connectToMongoDb } from "@utils/database";
 
 export async function POST(req) {
   const { userId, prompt, tag } = await req.json();
-  console.log("body in api", userId, prompt, tag);
 
   try {
     await connectToMongoDb();

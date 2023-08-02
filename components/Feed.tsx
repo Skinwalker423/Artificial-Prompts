@@ -45,7 +45,7 @@ const Feed = () => {
       const prompts: any = await fetch("/api/prompt");
 
       const data = await prompts.json();
-      console.log("fetching prompts", data);
+
       setData(data);
     };
 
@@ -66,7 +66,9 @@ const Feed = () => {
     setFilteredData(filteredData);
   };
 
-  const handleTagClick = (tag: string) => {};
+  const handleTagClick = (tag: string) => {
+    setSearchText(tag);
+  };
 
   return (
     <section className='feed'>
@@ -102,7 +104,7 @@ const Feed = () => {
 
       <PromptCardList
         data={searchText ? filteredData : data}
-        handleTagClick={() => handleTagClick}
+        handleTagClick={handleTagClick as () => void}
       />
     </section>
   );

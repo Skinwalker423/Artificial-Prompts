@@ -21,11 +21,7 @@ const Nav = () => {
     useState(false);
   const { data: session } = useSession();
 
-  const email = session?.user?.email;
   const image = session?.user?.image;
-
-  console.log("is logged in", session);
-  console.log("email", email);
 
   const dropdownLinksConfig: DropdownLinksConfigProps[] = [
     { title: "My Profile", href: "/profile" },
@@ -35,10 +31,7 @@ const Nav = () => {
   useEffect(() => {
     const getAndSetProviders = async () => {
       const response = await getProviders();
-      console.log(
-        "response for getting providers",
-        response
-      );
+
       setProviders(response);
     };
 

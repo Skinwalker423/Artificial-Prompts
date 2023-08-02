@@ -19,9 +19,8 @@ export const connectToMongoDb = async () => {
     } as ConnectOptions);
 
     isConnected = true;
-    console.log("mongodb now connected");
   } catch (error) {
-    console.log("problem connecting to mongodb", error);
+    console.error("problem connecting to mongodb", error);
   }
 };
 
@@ -29,6 +28,6 @@ export const fetchPromptById = async (id: string) => {
   const prompts: any = await fetch(`/api/prompt${id}`);
 
   const data = await prompts.json();
-  console.log("fetching prompt", data);
+
   return data;
 };

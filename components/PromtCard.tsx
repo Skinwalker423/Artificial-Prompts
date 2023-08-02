@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { PromptCardProps } from "@types";
 
@@ -12,8 +12,6 @@ const PromtCard = ({
   handleEdit,
   handleDelete,
 }: PromptCardProps) => {
-  console.log("post", post);
-
   const [copiedPrompt, setCopiedPrompt] = useState<
     string | null
   >(null);

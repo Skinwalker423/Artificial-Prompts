@@ -8,6 +8,7 @@ import React, {
 import { useRouter } from "next/navigation";
 import Form from "@components/Form";
 import { Post } from "@types";
+import { Metadata } from "next";
 
 interface SearchParamsProps {
   searchParams: {
@@ -28,7 +29,6 @@ const UpdatePrompt = ({
   const router = useRouter();
 
   const id = searchParams.id;
-  console.log(id);
 
   useEffect(() => {
     const fetchPrompt = async (promptId: string) => {
@@ -41,7 +41,6 @@ const UpdatePrompt = ({
       if (!data) {
         setError("could not find prompt. Check promptId.");
       } else {
-        console.log("found prompt", data);
         setPost(data);
       }
     };
@@ -70,7 +69,7 @@ const UpdatePrompt = ({
         router.push("/");
       }
     } catch (error) {
-      console.log("problem with modifying prompt", error);
+      console.error("problem with modifying prompt", error);
     } finally {
       setIsSubmitting(false);
     }

@@ -9,8 +9,6 @@ export async function GET(req: NextRequest) {
       "creator"
     );
 
-    console.log("prompts inside api", promptsList);
-
     return new Response(JSON.stringify(promptsList), {
       status: 201,
     });

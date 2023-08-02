@@ -2,12 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
-import { PromptProps } from "@types";
 
 const ProfilePage = () => {
-  const router = useRouter();
   const { data: session } = useSession();
 
   const [posts, setPosts] = useState([]);
@@ -20,7 +17,7 @@ const ProfilePage = () => {
       );
 
       const data = await userPosts.json();
-      console.log("fetching posts", data);
+
       setPosts(data);
     };
 

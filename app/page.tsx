@@ -1,11 +1,6 @@
 import React from "react";
 import Feed from "@components/Feed";
 
-// export const metadata: Metadata = {
-//   title: '',
-//   description: ''
-// }
-
 const Home = () => {
   return (
     <section className='w-full flex-center flex-col'>

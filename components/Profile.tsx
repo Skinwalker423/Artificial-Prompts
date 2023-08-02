@@ -9,11 +9,9 @@ const Profile = ({
   data,
   setPosts,
 }: ProfileProps) => {
-  console.log("data from api", data);
   const router = useRouter();
 
   const handleEdit = (post: PromptProps) => {
-    console.log("redirecting to edit");
     router.push(`/update-prompt?id=${post._id}`);
   };
   const handleDelete = async (post: PromptProps) => {
@@ -31,7 +29,6 @@ const Profile = ({
         );
 
         if (response.ok) {
-          console.log("delete was ok");
           const filteredPosts = data.filter(
             (prompt) => prompt._id !== post._id
           );

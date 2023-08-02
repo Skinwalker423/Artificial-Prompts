@@ -38,7 +38,7 @@ const CreatePrompt = () => {
         router.push("/");
       }
     } catch (error) {
-      console.log("problem with new prompt", error);
+      console.error("problem with new prompt", error);
     } finally {
       setIsSubmitting(false);
     }

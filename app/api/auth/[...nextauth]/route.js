@@ -1,7 +1,4 @@
-import NextAuth, {
-  NextAuthOptions,
-  Session,
-} from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { connectToMongoDb } from "@utils/database";
 import User from "@models/user";
@@ -25,10 +22,6 @@ export const authOptions = {
       const sessionUser = await User.findOne({
         email: session.user?.email,
       });
-      console.log(
-        "inside session finding sessionUser",
-        sessionUser
-      );
 
       if (!session.user) return session;
       session.user.id = sessionUser._id.toString();
@@ -44,7 +37,6 @@ export const authOptions = {
         });
 
         if (!userExists) {
-          console.log("user does not exist", profile);
           User.create({
             email: profile?.email,
             username: profile.name
@@ -54,11 +46,9 @@ export const authOptions = {
           });
         }
 
-        console.log("user exists", userExists);
-
         return true;
       } catch (err) {
-        console.log("problem signing in", err);
+        console.error("problem signing in", err);
         return false;
       }
     },
