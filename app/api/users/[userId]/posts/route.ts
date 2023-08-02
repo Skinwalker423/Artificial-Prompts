@@ -1,14 +1,13 @@
 import Prompt from "@models/prompt";
 import { connectToMongoDb } from "@utils/database";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export interface ParamsProps {
   userId: string;
 }
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: ParamsProps }
 ) {
   try {
