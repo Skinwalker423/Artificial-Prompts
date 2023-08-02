@@ -35,7 +35,10 @@ const PromptCardList = ({
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<PromptProps[]>([]);
+  const [filteredData, setFilteredData] = useState<
+    PromptProps[]
+  >([]);
 
   useEffect(() => {
     const fetchPrompts = async () => {
@@ -53,9 +56,14 @@ const Feed = () => {
     e
   ) => {
     e.preventDefault();
-    const searchFeed = async () => {
-      const response = await fetch("/api/prompt");
-    };
+    const filteredData = data.filter(
+      (post) =>
+        post.prompt.includes(searchText) ||
+        post.creator.username.includes(searchText) ||
+        post.tag.includes(searchText)
+    );
+
+    setFilteredData(filteredData);
   };
 
   const handleTagClick = (tag: string) => {};
@@ -70,14 +78,30 @@ const Feed = () => {
           type='text'
           placeholder='search for a tag or username'
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            const filteredData = data.filter(
+              (post) =>
+                post.prompt
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase()) ||
+                post.creator.username
+                  .toLowerCase()
+                  .includes(searchText) ||
+                post.tag
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
+            );
+
+            setFilteredData(filteredData);
+          }}
           required
           className='search_input peer'
         />
       </form>
 
       <PromptCardList
-        data={data}
+        data={searchText ? filteredData : data}
         handleTagClick={() => handleTagClick}
       />
     </section>
