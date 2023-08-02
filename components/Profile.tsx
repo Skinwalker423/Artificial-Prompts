@@ -3,7 +3,12 @@ import { ProfileProps, PromptProps } from "@types";
 import PromtCard from "./PromtCard";
 import { useRouter } from "next/navigation";
 
-const Profile = ({ name, desc, data }: ProfileProps) => {
+const Profile = ({
+  name,
+  desc,
+  data,
+  setPosts,
+}: ProfileProps) => {
   console.log("data from api", data);
   const router = useRouter();
 
@@ -11,7 +16,32 @@ const Profile = ({ name, desc, data }: ProfileProps) => {
     console.log("redirecting to edit");
     router.push(`/update-prompt?id=${post._id}`);
   };
-  const handleDelete = async (post: PromptProps) => {};
+  const handleDelete = async (post: PromptProps) => {
+    const confirmed = confirm(
+      "Are you sure you want to delete this prompt?"
+    );
+
+    if (confirmed) {
+      try {
+        const response = await fetch(
+          `api/prompt/${post._id.toString()}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (response.ok) {
+          console.log("delete was ok");
+          const filteredPosts = data.filter(
+            (prompt) => prompt._id !== post._id
+          );
+          setPosts(filteredPosts);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <section className='w-full'>

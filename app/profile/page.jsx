@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
+import { PromptProps } from "@types";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -31,6 +32,7 @@ const ProfilePage = () => {
       name={session?.user.name}
       desc='Welcome to your profile page'
       data={posts}
+      setPosts={setPosts}
     />
   );
 };

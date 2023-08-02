@@ -58,4 +58,5 @@ export interface ProfileProps {
   name: string;
   desc: string;
   data: PromptProps[];
+  setPosts: any;
 }
