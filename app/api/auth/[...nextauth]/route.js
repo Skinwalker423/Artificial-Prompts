@@ -5,7 +5,7 @@ import User from "@models/user";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export const authOptions = {
+const authOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     GoogleProvider({
@@ -48,7 +48,6 @@ export const authOptions = {
 
         return true;
       } catch (err) {
-        console.error("problem signing in", err);
         return false;
       }
     },
